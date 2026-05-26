@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
+from html import escape
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -26,6 +27,26 @@ ROOT = Path(__file__).resolve().parent
 ERROR_RATES = ["1", "025", "05", "075", "125", "15", "175", "2"]
 
 
+ICON_PATHS = {
+    "agent": "<path d='M12 2v4'/><path d='M12 18v4'/><path d='M4.93 4.93l2.83 2.83'/><path d='M16.24 16.24l2.83 2.83'/><path d='M2 12h4'/><path d='M18 12h4'/><path d='M4.93 19.07l2.83-2.83'/><path d='M16.24 7.76l2.83-2.83'/><circle cx='12' cy='12' r='4'/>",
+    "database": "<ellipse cx='12' cy='5' rx='8' ry='3'/><path d='M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5'/><path d='M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6'/>",
+    "target": "<circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='5'/><circle cx='12' cy='12' r='1'/>",
+    "cpu": "<rect x='7' y='7' width='10' height='10' rx='2'/><path d='M9 1v3'/><path d='M15 1v3'/><path d='M9 20v3'/><path d='M15 20v3'/><path d='M20 9h3'/><path d='M20 15h3'/><path d='M1 9h3'/><path d='M1 15h3'/>",
+    "play": "<path d='M5 3l14 9-14 9V3z'/>",
+    "archive": "<rect x='3' y='4' width='18' height='4' rx='1'/><path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8'/><path d='M10 12h4'/>",
+    "workflow": "<rect x='3' y='3' width='6' height='6' rx='1'/><rect x='15' y='3' width='6' height='6' rx='1'/><rect x='9' y='15' width='6' height='6' rx='1'/><path d='M9 6h6'/><path d='M12 9v6'/>",
+    "activity": "<path d='M22 12h-4l-3 8L9 4l-3 8H2'/>",
+    "wrench": "<path d='M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.4 2.4-2.6-2.6 2.4-2.4z'/>",
+    "edit": "<path d='M12 20h9'/><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z'/>",
+    "shield": "<path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/>",
+    "check": "<path d='M20 6 9 17l-5-5'/>",
+    "alert": "<path d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/><path d='M12 9v4'/><path d='M12 17h.01'/>",
+    "refresh": "<path d='M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16'/><path d='M3 21v-5h5'/><path d='M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8'/><path d='M21 3v5h-5'/>",
+    "globe": "<circle cx='12' cy='12' r='10'/><path d='M2 12h20'/><path d='M12 2a15.3 15.3 0 0 1 0 20'/><path d='M12 2a15.3 15.3 0 0 0 0 20'/>",
+    "table": "<path d='M3 5h18v14H3z'/><path d='M3 10h18'/><path d='M9 5v14'/><path d='M15 5v14'/>",
+}
+
+
 TEXT: Dict[str, Dict[str, str]] = {
     "en": {
         "toggle": "中文",
@@ -40,6 +61,7 @@ TEXT: Dict[str, Dict[str, str]] = {
         "rows": "Rows",
         "target": "Target",
         "task": "Task",
+        "model": "Model",
         "scenario": "Scenario",
         "error_rate": "Injected error rate",
         "candidate_models": "Candidate models",
@@ -100,6 +122,7 @@ TEXT: Dict[str, Dict[str, str]] = {
         "rows": "行数",
         "target": "目标列",
         "task": "任务",
+        "model": "模型",
         "scenario": "场景",
         "error_rate": "注入错误率",
         "candidate_models": "候选模型",
@@ -157,11 +180,12 @@ def main() -> None:
     t = lambda key: TEXT[lang][key]
 
     with st.sidebar:
+        st.markdown(_sidebar_brand(lang), unsafe_allow_html=True)
         st.button(t("toggle"), on_click=_toggle_language, use_container_width=True)
         if st.button(t("refresh"), use_container_width=True):
             st.rerun()
 
-    st.markdown(f"<div class='hero'><div><div class='eyebrow'>{t('subtitle')}</div><h1>{t('title')}</h1><p>{t('caption')}</p></div></div>", unsafe_allow_html=True)
+    st.markdown(_hero_html(lang), unsafe_allow_html=True)
 
     catalog = dataset_catalog()
     runs = available_runs()
@@ -178,42 +202,40 @@ def _render_agent_setup(catalog: List[Dict[str, object]], runs, lang: str) -> Di
     t = lambda key: TEXT[lang][key]
     names = [row["name"] for row in catalog]
 
-    st.markdown("<div class='section-title'>Agent Setup</div>", unsafe_allow_html=True)
+    st.markdown(_section_title("agent", "Agent Setup"), unsafe_allow_html=True)
     cols = st.columns([1.1, 1.1, 1.2, 1.2])
 
     with cols[0]:
         box = st.container(border=True)
-        box.markdown(f"<div class='step-label'>{t('step1')}</div>", unsafe_allow_html=True)
+        box.markdown(_step_heading("database", t("step1"), "Select the table artifact" if lang == "en" else "选择表格 artifact"), unsafe_allow_html=True)
         dataset = box.selectbox(t("dataset"), names, key="dataset_select")
         meta = next(row for row in catalog if row["name"] == dataset)
-        box.metric(t("rows"), f"{int(meta['rows']):,}")
+        box.markdown(_metric_card(t("rows"), f"{int(meta['rows']):,}", str(meta["source"]), "table", "blue"), unsafe_allow_html=True)
 
     with cols[1]:
         box = st.container(border=True)
-        box.markdown(f"<div class='step-label'>{t('step2')}</div>", unsafe_allow_html=True)
+        box.markdown(_step_heading("target", t("step2"), "Bind utility objective" if lang == "en" else "绑定下游目标"), unsafe_allow_html=True)
         scenario = box.radio(t("scenario"), ["original", "artificial"], horizontal=True, key=f"scenario_{dataset}")
         error_rate = box.selectbox(t("error_rate"), ERROR_RATES, key=f"rate_{dataset}") if scenario == "artificial" else None
-        box.metric(t("task"), str(meta["task_type"]))
-        box.caption(f"{t('target')}: {meta['target']}")
+        box.markdown(_metric_card(t("task"), str(meta["task_type"]), f"{t('target')}: {meta['target']}", "target", "green"), unsafe_allow_html=True)
 
     with cols[2]:
         box = st.container(border=True)
-        box.markdown(f"<div class='step-label'>{t('step3')}</div>", unsafe_allow_html=True)
+        box.markdown(_step_heading("cpu", t("step3"), "Choose downstream candidates" if lang == "en" else "选择候选下游模型"), unsafe_allow_html=True)
         candidates = list(meta["candidate_models"])
         default_models = [meta["default_model"]] if meta["default_model"] in candidates else candidates[:1]
         selected_models = box.multiselect(t("candidate_models"), candidates, default=default_models, key=f"models_{dataset}")
         selected_models = selected_models or default_models
         active_model = box.radio(t("active_model"), selected_models, horizontal=True, key=f"active_model_{dataset}")
-        box.caption(f"{t('action_space')}: no-op, repair, delete, replace")
+        box.markdown(_chip_row([f"{t('action_space')}", "no-op", "repair", "delete", "replace"]), unsafe_allow_html=True)
 
     with cols[3]:
         box = st.container(border=True)
-        box.markdown(f"<div class='step-label'>{t('step4')}</div>", unsafe_allow_html=True)
+        box.markdown(_step_heading("play", t("step4"), "Inspect or execute" if lang == "en" else "查看或真实执行"), unsafe_allow_html=True)
         matching = runs_for_config(runs, dataset, scenario=scenario, model_type=active_model, error_rate=error_rate)
         mode_options = [t("cached_mode"), t("real_mode")] if matching else [t("real_mode")]
         mode = box.radio("Mode", mode_options, horizontal=False, label_visibility="collapsed")
-        box.metric(t("records"), len(matching))
-        box.caption(f"{t('operators')}: {meta['cleaner_profile']}")
+        box.markdown(_metric_card(t("records"), len(matching), f"{t('operators')}: {meta['cleaner_profile']}", "archive", "amber"), unsafe_allow_html=True)
 
     return {
         "dataset": dataset,
@@ -232,14 +254,14 @@ def _render_execution_selector(runs, config: Dict[str, object], lang: str) -> Op
     left, right = st.columns([1.25, 1])
 
     with left:
-        st.markdown(f"<div class='panel-title'>{t('selected_run')}</div>", unsafe_allow_html=True)
+        st.markdown(_panel_title("archive", t("selected_run")), unsafe_allow_html=True)
         matching = config["matching_runs"]
         if config["mode"] == "cached" and matching:
             labels = [_artifact_label(run) for run in matching]
             selected_label = st.selectbox(t("selected_run"), labels, label_visibility="collapsed")
             selected = matching[labels.index(selected_label)]
             bundle = load_run(selected.run_dir)
-            st.code(str(selected.run_dir))
+            st.markdown(_artifact_card(selected, bundle, lang), unsafe_allow_html=True)
             _render_trace_badges(bundle, lang)
             return bundle
         if config["mode"] == "cached":
@@ -252,7 +274,7 @@ def _render_execution_selector(runs, config: Dict[str, object], lang: str) -> Op
 
 def _render_real_run_panel(config: Dict[str, object], lang: str) -> None:
     t = lambda key: TEXT[lang][key]
-    st.markdown(f"<div class='panel-title'>{t('real_panel')}</div>", unsafe_allow_html=True)
+    st.markdown(_panel_title("play", t("real_panel")), unsafe_allow_html=True)
     st.caption(t("real_note"))
     with st.form("real_run_form"):
         cols = st.columns(3)
@@ -286,13 +308,13 @@ def _render_artifact_workspace(bundle: Dict[str, object], lang: str) -> None:
     metrics = bundle["metrics"]
     caps = bundle["capabilities"]
 
-    st.markdown(f"<div class='section-title'>{t('summary')}</div>", unsafe_allow_html=True)
+    st.markdown(_section_title("activity", t("summary")), unsafe_allow_html=True)
     cols = st.columns(5)
-    cols[0].metric(t("dataset"), str(metrics.get("dataset", "")))
-    cols[1].metric(t("scenario"), f"{metrics.get('scenario', '')}/{metrics.get('error_rate') or 'native'}")
-    cols[2].metric(t("model"), str(metrics.get("model_type", "")))
-    cols[3].metric(t("fixed_delta"), _fmt_metric(metrics.get("downstream_fixed_delta", metrics.get("downstream_delta", ""))))
-    cols[4].metric(t("verifier_selected"), str(metrics.get("verifier_selected", "")))
+    cols[0].markdown(_metric_card(t("dataset"), str(metrics.get("dataset", "")), "artifact", "database", "blue"), unsafe_allow_html=True)
+    cols[1].markdown(_metric_card(t("scenario"), f"{metrics.get('scenario', '')}/{metrics.get('error_rate') or 'native'}", "data setting", "target", "green"), unsafe_allow_html=True)
+    cols[2].markdown(_metric_card(t("model"), str(metrics.get("model_type", "")), str(metrics.get("task_type", "")), "cpu", "purple"), unsafe_allow_html=True)
+    cols[3].markdown(_metric_card(t("fixed_delta"), _fmt_metric(metrics.get("downstream_fixed_delta", metrics.get("downstream_delta", ""))), "utility", "activity", "amber"), unsafe_allow_html=True)
+    cols[4].markdown(_metric_card(t("verifier_selected"), str(metrics.get("verifier_selected", "")), "policy", "shield", "slate"), unsafe_allow_html=True)
 
     if not caps["operator_trace"]:
         st.warning(t("missing_operator"))
@@ -322,11 +344,13 @@ def _render_artifact_workspace(bundle: Dict[str, object], lang: str) -> None:
 
 
 def _render_overview(bundle: Dict[str, object], lang: str) -> None:
+    t = lambda key: TEXT[lang][key]
     metrics = bundle["metrics"]
     trace = bundle["workflow"]
-    cols = st.columns(2)
+    cols = st.columns([1.1, 0.9])
     with cols[0]:
-        st.dataframe(pd.DataFrame([{
+        st.markdown(_panel_title("database", "Artifact profile" if lang == "en" else "Artifact 概况"), unsafe_allow_html=True)
+        st.markdown(_profile_grid({
             "dataset": metrics.get("dataset"),
             "task_type": metrics.get("task_type"),
             "target": metrics.get("target"),
@@ -334,9 +358,11 @@ def _render_overview(bundle: Dict[str, object], lang: str) -> None:
             "rows": metrics.get("rows"),
             "feature_count": metrics.get("feature_count"),
             "uniclean_cached": metrics.get("uniclean_cached"),
-        }]), use_container_width=True)
+        }), unsafe_allow_html=True)
     with cols[1]:
-        st.json(trace.get("capabilities", bundle["capabilities"]))
+        st.markdown(_panel_title("check", t("trace_badge")), unsafe_allow_html=True)
+        capabilities = trace.get("capabilities", bundle["capabilities"])
+        st.markdown(_capability_grid(capabilities), unsafe_allow_html=True)
 
 
 def _render_workflow(bundle: Dict[str, object], lang: str) -> None:
@@ -347,7 +373,7 @@ def _render_workflow(bundle: Dict[str, object], lang: str) -> None:
     chosen = st.selectbox(t("node_inspect"), labels)
     node_id = chosen.split(" | ", 1)[0]
     node = next(node for node in graph["nodes"] if node["id"] == node_id)
-    st.json(node)
+    st.markdown(_node_card(node), unsafe_allow_html=True)
 
 
 def _render_actions(bundle: Dict[str, object], lang: str) -> None:
@@ -357,12 +383,19 @@ def _render_actions(bundle: Dict[str, object], lang: str) -> None:
     if summary.empty:
         st.info(t("no_rows"))
         return
-    cols = st.columns([1, 1])
+    st.markdown(_action_cards(summary), unsafe_allow_html=True)
+    cols = st.columns([0.95, 1.05])
     with cols[0]:
-        st.dataframe(summary, use_container_width=True)
+        st.dataframe(summary, use_container_width=True, hide_index=True)
     with cols[1]:
-        fig = go.Figure(go.Bar(x=summary["action_name"], y=summary["count"], marker_color="#2563EB"))
-        fig.update_layout(height=300, margin=dict(l=10, r=10, t=20, b=10), yaxis_title=t("records"))
+        fig = go.Figure(go.Bar(
+            x=summary["action_name"],
+            y=summary["count"],
+            marker=dict(color=["#2563EB", "#059669", "#D97706", "#DC2626"][: len(summary)]),
+            text=summary["count"],
+            textposition="outside",
+        ))
+        fig.update_layout(height=320, margin=dict(l=10, r=10, t=26, b=10), yaxis_title=t("records"), plot_bgcolor="white", paper_bgcolor="white")
         st.plotly_chart(fig, use_container_width=True)
 
     selected_action = st.selectbox(t("action_filter"), summary["action_name"].tolist())
@@ -375,6 +408,12 @@ def _render_operators(bundle: Dict[str, object], lang: str) -> None:
     if operators.empty:
         st.info(t("missing_operator"))
         return
+
+    st.markdown(_metric_row([
+        (t("records"), len(operators), "operator rows", "wrench", "blue"),
+        ("rules", len(bundle["operation_rule_trace"]), "generated", "edit", "green"),
+        ("weights", len(bundle["operator_weight_trace"]), "feedback", "activity", "amber"),
+    ]), unsafe_allow_html=True)
 
     phase_options = ["all"] + sorted(operators["phase"].dropna().astype(str).unique().tolist()) if "phase" in operators.columns else ["all"]
     phase = st.selectbox(t("phase_filter"), phase_options)
@@ -404,6 +443,14 @@ def _render_operations(bundle: Dict[str, object], lang: str) -> None:
     if operations.empty:
         st.info(t("no_rows"))
         return
+
+    changed_total = int(operations["changed"].fillna(False).astype(bool).sum()) if "changed" in operations.columns else len(operations)
+    accepted_total = int(operations["accepted_by_verifier"].fillna(False).astype(bool).sum()) if "accepted_by_verifier" in operations.columns else len(operations)
+    st.markdown(_metric_row([
+        (t("records"), len(operations), "operation rows", "edit", "blue"),
+        (t("changed"), changed_total, "cell or row changes", "activity", "green"),
+        (t("accepted"), accepted_total, "verifier", "shield", "slate"),
+    ]), unsafe_allow_html=True)
 
     cols = st.columns(3)
     accepted_only = cols[0].checkbox(t("accepted_only"), value=False)
@@ -458,6 +505,184 @@ def _render_trace_badges(bundle: Dict[str, object], lang: str) -> None:
     st.markdown(" ".join(f"<span class='badge good'>{name}</span>" for name in good), unsafe_allow_html=True)
     if missing:
         st.markdown(" ".join(f"<span class='badge muted'>{name}</span>" for name in missing), unsafe_allow_html=True)
+
+
+def _icon(name: str, size: int = 18, color: str = "currentColor") -> str:
+    body = ICON_PATHS.get(name, ICON_PATHS["agent"])
+    return (
+        f"<svg class='icon' width='{size}' height='{size}' viewBox='0 0 24 24' fill='none' "
+        f"stroke='{color}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>{body}</svg>"
+    )
+
+
+def _sidebar_brand(lang: str) -> str:
+    title = "DDPAgent"
+    subtitle = "Data governance console" if lang == "en" else "数据治理控制台"
+    return (
+        "<div class='sidebar-brand'>"
+        f"<div class='brand-icon'>{_icon('agent', 22)}</div>"
+        f"<div><div class='brand-title'>{title}</div><div class='brand-subtitle'>{subtitle}</div></div>"
+        "</div>"
+    )
+
+
+def _hero_html(lang: str) -> str:
+    t = lambda key: TEXT[lang][key]
+    chips = ["Action allocation", "Operator orchestration", "Verifier feedback"] if lang == "en" else ["动作分配", "算子编排", "验证反馈"]
+    return (
+        "<div class='hero'>"
+        "<div class='hero-copy'>"
+        f"<div class='eyebrow'>{_icon('agent', 15)}{escape(t('subtitle'))}</div>"
+        f"<h1>{escape(t('title'))}</h1>"
+        f"<p>{escape(t('caption'))}</p>"
+        f"<div class='hero-chips'>{''.join(f'<span>{escape(chip)}</span>' for chip in chips)}</div>"
+        "</div>"
+        "<div class='hero-panel'>"
+        f"<div class='hero-panel-icon'>{_icon('workflow', 30)}</div>"
+        "<div class='hero-panel-title'>control loop</div>"
+        "<div class='hero-panel-flow'>Task -> Policy -> Operators -> Verifier</div>"
+        "</div>"
+        "</div>"
+    )
+
+
+def _section_title(icon: str, text: str) -> str:
+    return f"<div class='section-title'>{_icon(icon, 18)}<span>{escape(str(text))}</span></div>"
+
+
+def _panel_title(icon: str, text: str) -> str:
+    return f"<div class='panel-title'>{_icon(icon, 17)}<span>{escape(str(text))}</span></div>"
+
+
+def _step_heading(icon: str, title: str, subtitle: str) -> str:
+    return (
+        "<div class='step-heading'>"
+        f"<div class='step-icon'>{_icon(icon, 18)}</div>"
+        f"<div><div class='step-title'>{escape(str(title))}</div><div class='step-subtitle'>{escape(str(subtitle))}</div></div>"
+        "</div>"
+    )
+
+
+def _metric_card(title, value, caption: str, icon: str, tone: str = "blue") -> str:
+    return (
+        f"<div class='metric-card tone-{tone}'>"
+        f"<div class='metric-icon'>{_icon(icon, 18)}</div>"
+        f"<div><div class='metric-title'>{escape(str(title))}</div>"
+        f"<div class='metric-value'>{escape(str(value))}</div>"
+        f"<div class='metric-caption'>{escape(str(caption))}</div></div>"
+        "</div>"
+    )
+
+
+def _metric_row(items) -> str:
+    cards = "".join(_metric_card(title, value, caption, icon, tone) for title, value, caption, icon, tone in items)
+    return f"<div class='metric-row'>{cards}</div>"
+
+
+def _chip_row(chips: List[str]) -> str:
+    if not chips:
+        return ""
+    first, rest = chips[0], chips[1:]
+    return (
+        "<div class='chip-row'>"
+        f"<span class='chip-label'>{escape(str(first))}</span>"
+        + "".join(f"<span class='chip'>{escape(str(chip))}</span>" for chip in rest)
+        + "</div>"
+    )
+
+
+def _artifact_card(run, bundle: Dict[str, object], lang: str) -> str:
+    metrics = bundle["metrics"]
+    t = lambda key: TEXT[lang][key]
+    trace = "runtime trace" if bundle["capabilities"].get("operator_trace") else "cached only"
+    delta = _fmt_metric(metrics.get("downstream_fixed_delta", metrics.get("downstream_delta", "")))
+    return (
+        "<div class='artifact-card'>"
+        f"<div class='artifact-icon'>{_icon('archive', 22)}</div>"
+        "<div class='artifact-body'>"
+        f"<div class='artifact-title'>{escape(str(run.run_dir.name))}</div>"
+        f"<div class='artifact-meta'>{escape(str(run.run_dir))}</div>"
+        "<div class='artifact-stats'>"
+        f"<span>{escape(t('model'))}: {escape(str(metrics.get('model_type', '')))}</span>"
+        f"<span>{escape(t('fixed_delta'))}: {escape(delta)}</span>"
+        f"<span>{escape(trace)}</span>"
+        "</div></div></div>"
+    )
+
+
+def _profile_grid(values: Dict[str, object]) -> str:
+    rows = []
+    for key, value in values.items():
+        rows.append(
+            "<div class='profile-item'>"
+            f"<div class='profile-key'>{escape(str(key))}</div>"
+            f"<div class='profile-value'>{escape(str(value))}</div>"
+            "</div>"
+        )
+    return f"<div class='profile-grid'>{''.join(rows)}</div>"
+
+
+def _capability_grid(capabilities: Dict[str, object]) -> str:
+    cards = []
+    for key, value in capabilities.items():
+        cls = "capability-on" if bool(value) else "capability-off"
+        icon = "check" if bool(value) else "alert"
+        state = "ready" if bool(value) else "missing"
+        cards.append(
+            f"<div class='capability {cls}'>"
+            f"{_icon(icon, 16)}<div><div class='capability-name'>{escape(str(key))}</div>"
+            f"<div class='capability-state'>{state}</div></div></div>"
+        )
+    return f"<div class='capability-grid'>{''.join(cards)}</div>"
+
+
+def _node_card(node: Dict[str, object]) -> str:
+    kind = str(node.get("kind", "node"))
+    icon = {
+        "task": "database",
+        "controller": "agent",
+        "action": "activity",
+        "operator_stage": "wrench",
+        "operation": "edit",
+        "verifier": "shield",
+    }.get(kind, "workflow")
+    return (
+        "<div class='node-card'>"
+        f"<div class='node-icon'>{_icon(icon, 22)}</div>"
+        f"<div><div class='node-title'>{escape(str(node.get('label', ''))).replace(chr(10), '<br>')}</div>"
+        f"<div class='node-meta'>{escape(kind)} · count {escape(str(node.get('count', '')))}</div></div>"
+        "</div>"
+    )
+
+
+def _action_cards(summary: pd.DataFrame) -> str:
+    total = int(summary["count"].sum()) if "count" in summary.columns else 0
+    icon_map = {
+        "no_op": "shield",
+        "repair_value": "wrench",
+        "delete": "alert",
+        "replace_nearby": "edit",
+    }
+    tone_map = {
+        "no_op": "slate",
+        "repair_value": "green",
+        "delete": "amber",
+        "replace_nearby": "blue",
+    }
+    cards = []
+    for _, row in summary.iterrows():
+        action = str(row["action_name"])
+        count = int(row["count"])
+        pct = count / total * 100 if total else 0
+        cards.append(
+            f"<div class='action-card tone-{tone_map.get(action, 'blue')}'>"
+            f"<div class='action-top'>{_icon(icon_map.get(action, 'activity'), 18)}<span>{escape(action)}</span></div>"
+            f"<div class='action-count'>{count}</div>"
+            f"<div class='action-bar'><span style='width:{pct:.1f}%'></span></div>"
+            f"<div class='action-pct'>{pct:.1f}% of decisions</div>"
+            "</div>"
+        )
+    return f"<div class='action-card-row'>{''.join(cards)}</div>"
 
 
 def _run_real_pipeline(dataset: str, scenario: str, error_rate: Optional[str], model: str, episodes: int, max_errors: int, single_max: int):
@@ -660,52 +885,297 @@ def _inject_css() -> None:
     st.markdown(
         """
         <style>
-        .block-container { padding-top: 1.2rem; padding-bottom: 2rem; }
+        :root {
+            --ink: #0F172A;
+            --muted: #64748B;
+            --line: #E2E8F0;
+            --panel: #FFFFFF;
+            --page: #F8FAFC;
+            --blue: #2563EB;
+            --green: #059669;
+            --amber: #D97706;
+            --purple: #7C3AED;
+            --red: #DC2626;
+            --slate: #475569;
+        }
+        .stApp { background: var(--page); }
+        .block-container { padding-top: 1.1rem; padding-bottom: 2rem; max-width: 1420px; }
+        section[data-testid="stSidebar"] { background: #FFFFFF; border-right: 1px solid var(--line); }
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            border-color: var(--line);
+            border-radius: 14px;
+            background: #FFFFFF;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+        }
+        .icon { vertical-align: -3px; flex: 0 0 auto; }
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 4px 18px 4px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 14px;
+        }
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #EFF6FF;
+            color: var(--blue);
+            display: grid;
+            place-items: center;
+            border: 1px solid #BFDBFE;
+        }
+        .brand-title { font-size: 16px; font-weight: 800; color: var(--ink); line-height: 1.1; }
+        .brand-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
         .hero {
             border: 1px solid #E2E8F0;
-            border-radius: 12px;
-            padding: 22px 26px;
+            border-radius: 18px;
+            padding: 24px 28px;
             background: #FFFFFF;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+            border-left: 5px solid var(--blue);
         }
         .hero h1 {
-            margin: 2px 0 4px 0;
+            margin: 5px 0 8px 0;
             color: #0F172A;
-            font-size: 34px;
+            font-size: 38px;
+            line-height: 1.05;
             letter-spacing: 0;
         }
-        .hero p { margin: 0; color: #475569; font-size: 15px; }
+        .hero p { margin: 0; color: #475569; font-size: 15px; max-width: 780px; }
+        .hero-copy { min-width: 0; }
+        .hero-chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .hero-chips span {
+            border: 1px solid #CBD5E1;
+            border-radius: 999px;
+            padding: 5px 10px;
+            color: #334155;
+            background: #F8FAFC;
+            font-size: 12px;
+            font-weight: 650;
+        }
+        .hero-panel {
+            min-width: 260px;
+            border: 1px solid #DBEAFE;
+            border-radius: 16px;
+            padding: 16px;
+            background: #EFF6FF;
+            color: #1E3A8A;
+        }
+        .hero-panel-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: #FFFFFF;
+            color: var(--blue);
+            border: 1px solid #BFDBFE;
+        }
+        .hero-panel-title { margin-top: 12px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
+        .hero-panel-flow { margin-top: 5px; color: #334155; font-size: 13px; }
         .eyebrow {
             color: #2563EB;
             font-weight: 700;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0;
+            display: flex;
+            align-items: center;
+            gap: 7px;
         }
         .section-title {
-            margin: 18px 0 10px 0;
+            margin: 20px 0 12px 0;
             font-size: 18px;
             font-weight: 700;
             color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .panel-title {
-            margin: 4px 0 8px 0;
+            margin: 8px 0 10px 0;
             font-size: 15px;
             font-weight: 700;
             color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .step-card {
-            border: 1px solid #E2E8F0;
-            border-radius: 10px;
-            padding: 14px 14px 10px 14px;
-            background: #FFFFFF;
-            min-height: 235px;
-        }
-        .step-label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
+        .step-heading {
+            display: flex;
+            gap: 10px;
+            align-items: center;
             margin-bottom: 8px;
+        }
+        .step-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            background: #EFF6FF;
+            color: var(--blue);
+            border: 1px solid #BFDBFE;
+        }
+        .step-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--ink);
+        }
+        .step-subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 1px;
+        }
+        .metric-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px;
+            background: #FFFFFF;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            min-height: 86px;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+        }
+        .metric-card:hover, .artifact-card:hover, .action-card:hover, .node-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+        }
+        .metric-card, .artifact-card, .action-card, .node-card { transition: transform 140ms ease, box-shadow 140ms ease; }
+        .metric-icon, .artifact-icon, .node-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            border: 1px solid currentColor;
+        }
+        .tone-blue .metric-icon, .tone-blue .action-top { color: var(--blue); }
+        .tone-green .metric-icon, .tone-green .action-top { color: var(--green); }
+        .tone-amber .metric-icon, .tone-amber .action-top { color: var(--amber); }
+        .tone-purple .metric-icon, .tone-purple .action-top { color: var(--purple); }
+        .tone-slate .metric-icon, .tone-slate .action-top { color: var(--slate); }
+        .metric-title { font-size: 12px; color: var(--muted); font-weight: 650; }
+        .metric-value { color: var(--ink); font-weight: 820; font-size: 21px; line-height: 1.15; margin-top: 3px; overflow-wrap: anywhere; }
+        .metric-caption { color: var(--muted); font-size: 12px; margin-top: 4px; }
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .chip-label, .chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 12px;
+            border: 1px solid var(--line);
+        }
+        .chip-label { color: var(--slate); background: #F8FAFC; font-weight: 700; }
+        .chip { color: #075985; background: #F0F9FF; border-color: #BAE6FD; }
+        .artifact-card {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px;
+            background: #FFFFFF;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .artifact-icon { color: var(--blue); background: #EFF6FF; border-color: #BFDBFE; }
+        .artifact-body { min-width: 0; }
+        .artifact-title { font-weight: 800; color: var(--ink); font-size: 15px; }
+        .artifact-meta { color: var(--muted); font-size: 12px; margin-top: 3px; word-break: break-all; }
+        .artifact-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .artifact-stats span {
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 12px;
+            background: #F8FAFC;
+            color: #334155;
+            border: 1px solid var(--line);
+        }
+        .profile-grid, .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .profile-item, .capability {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #FFFFFF;
+            padding: 11px;
+        }
+        .profile-key, .capability-state { color: var(--muted); font-size: 12px; }
+        .profile-value, .capability-name { color: var(--ink); font-size: 14px; font-weight: 760; margin-top: 3px; word-break: break-word; }
+        .capability { display: flex; gap: 9px; align-items: center; }
+        .capability-on { color: var(--green); background: #F0FDF4; border-color: #BBF7D0; }
+        .capability-off { color: var(--amber); background: #FFFBEB; border-color: #FDE68A; }
+        .node-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+            background: #FFFFFF;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .node-icon { color: var(--purple); background: #F5F3FF; border-color: #DDD6FE; }
+        .node-title { color: var(--ink); font-weight: 820; font-size: 15px; }
+        .node-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+        .action-card-row {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .action-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 13px;
+            background: #FFFFFF;
+        }
+        .action-top { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; }
+        .action-count { font-size: 26px; color: var(--ink); font-weight: 850; margin-top: 10px; }
+        .action-bar { height: 7px; border-radius: 999px; background: #E2E8F0; overflow: hidden; margin-top: 8px; }
+        .action-bar span { display: block; height: 100%; border-radius: 999px; background: currentColor; }
+        .action-pct { color: var(--muted); font-size: 12px; margin-top: 6px; }
+        .tone-blue .action-bar span { background: var(--blue); }
+        .tone-green .action-bar span { background: var(--green); }
+        .tone-amber .action-bar span { background: var(--amber); }
+        .tone-slate .action-bar span { background: var(--slate); }
+        div[data-testid="stButton"] > button {
+            border-radius: 10px;
+            border: 1px solid #BFDBFE;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-weight: 760;
+        }
+        div[data-testid="stFormSubmitButton"] > button {
+            border-radius: 11px;
+            border: 1px solid #1D4ED8;
+            background: #2563EB;
+            color: #FFFFFF;
+            font-weight: 780;
+            height: 42px;
+        }
+        div[data-testid="stTabs"] button p { font-weight: 750; font-size: 14px; }
+        div[data-testid="stDataFrame"] {
+            border-radius: 12px;
+            overflow: hidden;
         }
         .badge {
             display: inline-block;
@@ -718,6 +1188,11 @@ def _inject_css() -> None:
         .badge.good { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
         .badge.muted { background: #F8FAFC; color: #64748B; }
         div[data-testid="stMetricValue"] { font-size: 22px; }
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; align-items: stretch; }
+            .hero-panel { min-width: 0; }
+            .metric-row, .action-card-row, .profile-grid, .capability-grid { grid-template-columns: 1fr; }
+        }
         </style>
         """,
         unsafe_allow_html=True,

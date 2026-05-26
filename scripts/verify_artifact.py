@@ -11,6 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 DATASETS = {"beers", "flights", "hospitals", "rayyan", "tax"}
 BASELINES = {"baran", "bigdansing", "holistic", "holoclean", "horizon"}
 REFERENCE_STRATEGIES = {"no_op", "oracle_full_repair", "delete_true_error_rows", "uniclean_full"}
+IGNORED_ROOTS = {
+    ".git",
+    ".idea",
+    ".pytest_cache",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "TolerRL",
+}
 
 
 def fail(message: str) -> None:
@@ -25,7 +34,7 @@ def read_csv(rel: str) -> pd.DataFrame:
 
 
 def check_no_soccer_paths() -> None:
-    bad = [p for p in ROOT.rglob("*") if "soccer" in str(p.relative_to(ROOT)).lower()]
+    bad = [p for p in ROOT.rglob("*") if not _ignored_path(p) and "soccer" in str(p.relative_to(ROOT)).lower()]
     if bad:
         sample = "\n".join(str(p.relative_to(ROOT)) for p in bad[:10])
         fail(f"unexpected Soccer files in paper artifact:\n{sample}")
@@ -96,10 +105,18 @@ def check_python_defaults() -> None:
 
 
 def check_large_files() -> None:
-    too_large = [p for p in ROOT.rglob("*") if p.is_file() and p.stat().st_size >= 95 * 1024 * 1024]
+    too_large = [p for p in ROOT.rglob("*") if not _ignored_path(p) and p.is_file() and p.stat().st_size >= 95 * 1024 * 1024]
     if too_large:
         sample = "\n".join(f"{p.relative_to(ROOT)} {p.stat().st_size}" for p in too_large[:10])
         fail(f"files near GitHub single-file limit:\n{sample}")
+
+
+def _ignored_path(path: Path) -> bool:
+    try:
+        rel = path.relative_to(ROOT)
+    except ValueError:
+        return False
+    return bool(rel.parts and rel.parts[0] in IGNORED_ROOTS)
 
 
 def main() -> int:

@@ -5,7 +5,9 @@ __pycache__/
 .ruff_cache/
 .venv/
 venv/
+TolerRL/
 .DS_Store
+.idea/
 
 *.aux
 *.bbl
