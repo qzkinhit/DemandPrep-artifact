@@ -2,17 +2,30 @@
 
 [English README](README.md)
 
-本仓库包含 ADS 2026 workshop 论文所使用的代码、数据集、缓存清洗结果、论文文件和交互式演示：
+本仓库包含 DDPAgent 的代码、数据集、缓存清洗结果、实验汇总和交互式演示：
 
 **DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
 
-仓库范围严格对应论文和演示。这里只包含论文中使用的数据集、baseline、缓存清洗结果和实验汇总。
+本仓库不包含论文 LaTeX 源码或 PDF。开源范围仅包括可复现代码、数据 artifact、实验输出和演示界面。
+
+## 引用
+
+如果使用本仓库，请引用随附的 DDPAgent 论文：
+
+```bibtex
+@misc{qian2026ddpagent,
+  title  = {DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
+  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi},
+  year   = {2026},
+  note   = {Research artifact}
+}
+```
 
 ## 核心思想
 
 DDPAgent 将数据准备看作一个数据治理 agent，而不是一条固定的数据清洗流水线。给定下游任务、候选模型、预算、候选动作和可用的数据算子后，系统先进行零人工真值成本的动作分配训练。在推理阶段，策略会为每个检测到的错误或数据对象选择动作，例如不操作、修复、删除或近邻值替换。动作确定后，再进入该动作对应的算子空间，由算子编排层生成具体的数据操作和可追溯记录。
 
-论文中的实现以数据清洗为例。修复和替换动作会调用多信号清洗算子编排层，生成真实修复规则、执行顺序和反馈权重。这个框架本身不是只能做清洗。后续可以扩展到数据增强、数据选择、是否调模型、模型调参等动作。每个动作下面也可以维护自己的算子库和编排策略。
+当前实现以数据清洗为例。修复和替换动作会调用多信号清洗算子编排层，生成真实修复规则、执行顺序和反馈权重。这个框架本身不是只能做清洗。后续可以扩展到数据增强、数据选择、是否调模型、模型调参等动作。每个动作下面也可以维护自己的算子库和编排策略。
 
 ## 真实性与溯源
 
@@ -32,19 +45,18 @@ python -m ads_clean.cli run ... --force-uniclean-run --trace-operators
 - `src/demandclean`：动作分配控制器使用的强化学习实现。
 - `src/SampleScrubber`、`src/AnalyticsCache`、`src/CoreSetSample`：清洗算子执行和编排相关代码。
 - `data/uniclean`：Beers、Flights、Hospitals、Rayyan 和 Tax-10K 的原生错误表。
-- `result_assets/UnicleanResult`：论文使用的缓存原生错误表、人工注入错误表、FullOps 输出和固定清洗 baseline 输出。
-- `outputs/experiments_20260519_final` 和 `outputs/experiments_20260520_hospital_measurecode`：论文实验汇总和运行产物。
+- `result_assets/UnicleanResult`：实验使用的缓存原生错误表、人工注入错误表、FullOps 输出和固定清洗 baseline 输出。
+- `outputs/experiments_20260519_final` 和 `outputs/experiments_20260520_hospital_measurecode`：实验汇总和运行产物。
 - `outputs/demo_trace_runs`：交互式演示使用的真实 trace 运行结果。
-- `paper`：论文 LaTeX 源码、PDF、参考文献和生成图片。
 - `streamlit_app.py`：交互式工作流可视化页面。
 
 ## 数据集和 Baseline 范围
 
 仓库包含的数据集为 Beers、Flights、Hospitals、Rayyan 和 Tax-10K。
 
-固定清洗 baseline 包括 Baran、BigDansing、Holistic、HoloClean 和 Horizon。论文中还使用了 No-op、FullOps、OracleDel 和 GTRepair 作为诊断控制。其中 OracleDel 和 GTRepair 需要干净参考表，不是可部署的固定清洗 baseline。
+固定清洗 baseline 包括 Baran、BigDansing、Holistic、HoloClean 和 Horizon。实验中还使用了 No-op、FullOps、OracleDel 和 GTRepair 作为诊断控制。其中 OracleDel 和 GTRepair 需要干净参考表，不是可部署的固定清洗 baseline。
 
-缓存的固定清洗表用于复现论文中的下游机器学习评估。本仓库不从零重新运行 Baran、BigDansing、Holistic、HoloClean 或 Horizon。
+缓存的固定清洗表用于复现实验中的下游机器学习评估。本仓库不从零重新运行 Baran、BigDansing、Holistic、HoloClean 或 Horizon。
 
 ## 环境配置
 
@@ -66,7 +78,7 @@ pip install -r requirements.txt
 bash scripts/reproduce_cached.sh
 ```
 
-该命令会运行单元测试、检查 artifact 范围、验证论文汇总结果，并根据已有实验表重新生成论文图。
+该命令会运行单元测试、检查 artifact 范围、验证实验汇总结果，并根据已有实验表在 `outputs/generated_figures` 下重新生成结果图。
 
 ## 完整实验复跑
 
@@ -86,7 +98,7 @@ bash scripts/reproduce_full.sh
 bash scripts/run_demo_trace.sh
 ```
 
-该脚本会在论文数据集上运行原生错误和人工注入错误设置，并启用运行时算子 trace。结果会写入 `outputs/demo_trace_runs`。
+该脚本会在仓库包含的数据集上运行原生错误和人工注入错误设置，并启用运行时算子 trace。结果会写入 `outputs/demo_trace_runs`。
 
 也可以手动运行一个小实验：
 
@@ -135,7 +147,7 @@ http://127.0.0.1:8501
 
 ## 结果溯源
 
-论文主要结果表：
+主要实验汇总表：
 
 - `outputs/experiments_20260519_final/adsclean/adsclean_summary.csv`
 - `outputs/experiments_20260519_final/baseline_eval/original/baseline_ml_summary.csv`
@@ -158,4 +170,4 @@ http://127.0.0.1:8501
 
 ## License
 
-代码使用 MIT License。数据集和缓存 baseline 输出仅用于复现论文实验，原始上游数据集许可仍然适用。
+代码使用 MIT License。数据集和缓存 baseline 输出仅用于复现实验，原始上游数据集许可仍然适用。

@@ -2,15 +2,28 @@
 
 [中文说明](README.zh-CN.md)
 
-This repository contains the code, datasets, cached cleaning outputs, paper artifacts, and interactive demo used by the ADS 2026 workshop paper:
+This repository contains the code, datasets, cached cleaning outputs, reported experiment summaries, and interactive demo for DDPAgent:
 
 **DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
 
-The artifact is scoped to the paper. It includes only the datasets, baselines, cached cleaning outputs, and experiment summaries used by the paper and the demo.
+The repository does not include the paper source or PDF. It is scoped to reproducible code, data artifacts, experiment outputs, and the demo.
+
+## Citation
+
+If you use this repository, please cite the accompanying DDPAgent paper:
+
+```bibtex
+@misc{qian2026ddpagent,
+  title  = {DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
+  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi},
+  year   = {2026},
+  note   = {Research artifact}
+}
+```
 
 ## Core Idea
 
-DDPAgent treats data preparation as a data-governance agent rather than a single fixed cleaning pipeline. Given a downstream task, model type, budget, candidate actions, and available data operators, the system first trains an action-allocation policy without paying human ground-truth cost. At inference time, the policy chooses what to do for each detected error or data object, such as no-op, repair, delete, or value replacement. Each action then dispatches to its own operator space. In the cleaning instantiation used in the paper, repair and replacement actions use a multi-signal cleaner orchestration layer that generates concrete repair rules and execution traces.
+DDPAgent treats data preparation as a data-governance agent rather than a single fixed cleaning pipeline. Given a downstream task, model type, budget, candidate actions, and available data operators, the system first trains an action-allocation policy without paying human ground-truth cost. At inference time, the policy chooses what to do for each detected error or data object, such as no-op, repair, delete, or value replacement. Each action then dispatches to its own operator space. In the cleaning instantiation used here, repair and replacement actions use a multi-signal cleaner orchestration layer that generates concrete repair rules and execution traces.
 
 This design is intentionally extensible. The action space is not limited to cleaning. Future actions can include data augmentation, data selection, model-tuning decisions, or other data-preparation operations. Likewise, each action can maintain its own operator library and orchestration strategy.
 
@@ -32,19 +45,18 @@ That command reruns UniClean and DDPAgent instead of fabricating operator covera
 - `src/demandclean`: vendored RL action-allocation implementation used by the controller.
 - `src/SampleScrubber`, `src/AnalyticsCache`, `src/CoreSetSample`: vendored operator-execution substrate used by the cleaning executor.
 - `data/uniclean`: packaged native-error tables for Beers, Flights, Hospitals, Rayyan, and Tax-10K.
-- `result_assets/UnicleanResult`: cached native and injected tables, full-operator outputs, and fixed-cleaner outputs used by the paper.
-- `outputs/experiments_20260519_final` and `outputs/experiments_20260520_hospital_measurecode`: paper experiment summaries and run artifacts.
+- `result_assets/UnicleanResult`: cached native and injected tables, full-operator outputs, and fixed-cleaner outputs used by the reported experiments.
+- `outputs/experiments_20260519_final` and `outputs/experiments_20260520_hospital_measurecode`: reported experiment summaries and run artifacts.
 - `outputs/demo_trace_runs`: real trace-enabled run artifacts used by the interactive demo.
-- `paper`: paper source, compiled PDF, bibliography, and generated figures.
 - `streamlit_app.py`: interactive workflow explorer.
 
 ## Scope
 
 Included datasets are Beers, Flights, Hospitals, Rayyan, and Tax-10K.
 
-Fixed-cleaner baselines included in the artifact are Baran, BigDansing, Holistic, HoloClean, and Horizon. Diagnostic controls used by the paper include No-op, FullOps, OracleDel, and GTRepair. OracleDel and GTRepair require clean-reference information and are not deployable fixed cleaning baselines.
+Fixed-cleaner baselines included in the artifact are Baran, BigDansing, Holistic, HoloClean, and Horizon. Diagnostic controls include No-op, FullOps, OracleDel, and GTRepair. OracleDel and GTRepair require clean-reference information and are not deployable fixed cleaning baselines.
 
-The cached fixed-cleaner tables are used to reproduce the paper's downstream ML evaluation. This artifact does not rerun Baran, BigDansing, Holistic, HoloClean, or Horizon from scratch.
+The cached fixed-cleaner tables are used to reproduce the reported downstream ML evaluation. This artifact does not rerun Baran, BigDansing, Holistic, HoloClean, or Horizon from scratch.
 
 ## Setup
 
@@ -66,7 +78,7 @@ The fastest verification path uses included cached tables and summaries.
 bash scripts/reproduce_cached.sh
 ```
 
-This runs unit tests, validates artifact scope, checks reported result summaries, and regenerates paper figures from included experiment tables.
+This runs unit tests, validates artifact scope, checks reported result summaries, and regenerates result figures under `outputs/generated_figures`.
 
 ## Full Experiment Rerun
 
@@ -86,7 +98,7 @@ To generate real workflow traces for the UI, use:
 bash scripts/run_demo_trace.sh
 ```
 
-This script runs native and injected settings for the paper datasets with multiple downstream models and enables runtime operator tracing. It writes results to `outputs/demo_trace_runs`.
+This script runs native and injected settings for the included datasets with multiple downstream models and enables runtime operator tracing. It writes results to `outputs/demo_trace_runs`.
 
 A smaller single run can be launched manually:
 
@@ -135,7 +147,7 @@ The workflow explorer shows:
 
 ## Result Provenance
 
-Main paper summaries:
+Main reported summaries:
 
 - `outputs/experiments_20260519_final/adsclean/adsclean_summary.csv`
 - `outputs/experiments_20260519_final/baseline_eval/original/baseline_ml_summary.csv`
@@ -158,4 +170,4 @@ Cached runs may not include runtime operator traces because cached cleaned table
 
 ## License
 
-Code is released under the MIT License. Dataset and cached baseline outputs are included for research reproduction of the paper experiments. Original upstream dataset licenses may apply.
+Code is released under the MIT License. Dataset and cached baseline outputs are included for research reproduction of the reported experiments. Original upstream dataset licenses may apply.

@@ -37,7 +37,7 @@ def check_no_soccer_paths() -> None:
     bad = [p for p in ROOT.rglob("*") if not _ignored_path(p) and "soccer" in str(p.relative_to(ROOT)).lower()]
     if bad:
         sample = "\n".join(str(p.relative_to(ROOT)) for p in bad[:10])
-        fail(f"unexpected Soccer files in paper artifact:\n{sample}")
+        fail(f"unexpected Soccer files in artifact:\n{sample}")
 
 
 def check_packaged_data() -> None:
@@ -83,7 +83,7 @@ def check_summary(rel: str, expected_rows: int | None = None) -> None:
         fail(f"{rel} has {len(df)} rows, expected {expected_rows}")
 
 
-def check_paper_summaries() -> None:
+def check_reported_summaries() -> None:
     check_summary("outputs/experiments_20260519_final/adsclean/adsclean_summary.csv", 45)
     check_summary("outputs/experiments_20260519_final/baseline_eval/original/baseline_ml_summary.csv", 45)
     check_summary("outputs/experiments_20260519_final/baseline_eval/artificial/baseline_ml_summary.csv", 360)
@@ -123,7 +123,7 @@ def main() -> int:
     check_no_soccer_paths()
     check_packaged_data()
     check_baseline_assets()
-    check_paper_summaries()
+    check_reported_summaries()
     check_python_defaults()
     check_large_files()
     print("[artifact-check] OK")

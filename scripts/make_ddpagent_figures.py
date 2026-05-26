@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate compact figures for the DDPAgent workshop draft."""
+"""Generate compact DDPAgent result figures from included experiment tables."""
 
 from pathlib import Path
 import ast
@@ -10,7 +10,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FIG_DIR = ROOT / "paper" / "figures"
+FIG_DIR = ROOT / "outputs" / "generated_figures"
 OUT_FINAL = ROOT / "outputs" / "experiments_20260519_final"
 OUT_VERIFIER = ROOT / "outputs" / "experiments_20260519_verifier"
 OUT_HOSPITAL_TARGET = ROOT / "outputs" / "experiments_20260520_hospital_measurecode"

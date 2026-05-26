@@ -17,6 +17,8 @@ TolerRL/
 *.log
 *.out
 *.synctex.gz
+paper/
 
 outputs/**/logs/
 outputs/rerun_*/
+outputs/generated_figures/
