@@ -17,6 +17,7 @@ class ExecutionResult:
     cleaned_df: pd.DataFrame
     cleaned_csv: Path
     repair_source_log: List[Dict[str, object]]
+    operation_trace: List[Dict[str, object]]
     fallback_count: int
     policy_override_count: int
 
@@ -46,6 +47,7 @@ def execute_final_cleaning(
         raise ValueError("uniclean_scope must be 'cell' or 'row'")
     raw = encoded.dirty_df.reset_index(drop=True).copy()
     repair_source_log: List[Dict[str, object]] = []
+    operation_trace: List[Dict[str, object]] = []
     fallback_count = 0
     policy_override_count = 0
     delete_positions = set()
@@ -62,29 +64,47 @@ def execute_final_cleaning(
         if action == 1:
             _apply_uniclean(
                 raw, row_pos, row_key, feature_col, encoded, uniclean_source,
-                repair_source_log, action_name="repair_value", scope=uniclean_scope,
+                repair_source_log, operation_trace,
+                action_name="repair_value", scope=uniclean_scope,
                 strict=True,
             )
         elif action == 3:
             if ve_source == "uniclean":
                 applied = _apply_uniclean(
                     raw, row_pos, row_key, feature_col, encoded, uniclean_source,
-                    repair_source_log, action_name="replace_nearby", scope=uniclean_scope,
+                    repair_source_log, operation_trace,
+                    action_name="replace_nearby", scope=uniclean_scope,
                     strict=False,
                 )
                 if not applied:
                     fallback_count += 1
-                    _apply_decoded_value(raw, row_pos, row_key, feature_col, encoded, decision, repair_source_log)
+                    _apply_decoded_value(raw, row_pos, row_key, feature_col, encoded, decision, repair_source_log, operation_trace)
             else:
-                _apply_decoded_value(raw, row_pos, row_key, feature_col, encoded, decision, repair_source_log)
+                _apply_decoded_value(raw, row_pos, row_key, feature_col, encoded, decision, repair_source_log, operation_trace)
         elif action == 2:
             if delete_policy == "execute":
-                delete_positions.add(row_pos)
+                if row_pos not in delete_positions:
+                    delete_positions.add(row_pos)
+                    operation_trace.append(
+                        {
+                            "operation_id": len(operation_trace),
+                            "operation_type": "row_delete",
+                            "row_idx": row_key,
+                            "row_pos": row_pos,
+                            "column": "",
+                            "action": "delete",
+                            "source": "ddpagent_action_policy",
+                            "old_value": "",
+                            "new_value": "",
+                            "changed": True,
+                        }
+                    )
             elif delete_policy == "uniclean_repair":
                 policy_override_count += 1
                 _apply_uniclean(
                     raw, row_pos, row_key, feature_col, encoded, uniclean_source,
-                    repair_source_log, action_name="delete_as_uniclean_repair", scope=uniclean_scope,
+                    repair_source_log, operation_trace,
+                    action_name="delete_as_uniclean_repair", scope=uniclean_scope,
                     strict=True,
                 )
             else:
@@ -104,7 +124,7 @@ def execute_final_cleaning(
 
     cleaned_csv = run_dir / "cleaned.csv"
     raw.to_csv(cleaned_csv, index=False)
-    return ExecutionResult(raw, cleaned_csv, repair_source_log, fallback_count, policy_override_count)
+    return ExecutionResult(raw, cleaned_csv, repair_source_log, operation_trace, fallback_count, policy_override_count)
 
 
 def _row_key(df: pd.DataFrame, row_pos: int, index_col: str) -> int:
@@ -124,6 +144,7 @@ def _apply_uniclean(
     encoded: EncodedDataset,
     uniclean_source: CleanedValueSource,
     repair_source_log: List[Dict[str, object]],
+    operation_trace: List[Dict[str, object]],
     action_name: str,
     scope: str,
     strict: bool,
@@ -153,6 +174,21 @@ def _apply_uniclean(
                     "value": value,
                 }
             )
+            operation_trace.append(
+                {
+                    "operation_id": len(operation_trace),
+                    "operation_type": "cell_update",
+                    "row_idx": row_key,
+                    "row_pos": row_pos,
+                    "column": col,
+                    "action": action_name,
+                    "source": uniclean_source.source_name,
+                    "old_value": before,
+                    "new_value": value,
+                    "changed": _norm(before) != _norm(value),
+                    "source_path": str(uniclean_source.source_path) if uniclean_source.source_path else "",
+                }
+            )
     if strict and missing:
         raise ValueError(
             f"Missing UniClean execution value for dataset={getattr(encoded.config, 'name', 'unknown')}, "
@@ -169,8 +205,10 @@ def _apply_decoded_value(
     encoded: EncodedDataset,
     decision: Dict[str, object],
     repair_source_log: List[Dict[str, object]],
+    operation_trace: List[Dict[str, object]],
 ) -> None:
     value = encoded.decode_feature_value(feature_col, decision.get("result_value"))
+    before = raw.loc[row_pos, feature_col]
     raw.loc[row_pos, feature_col] = value
     repair_source_log.append(
         {
@@ -180,6 +218,21 @@ def _apply_decoded_value(
             "action": "replace_nearby",
             "source": "demandclean_value_estimator",
             "value": value,
+        }
+    )
+    operation_trace.append(
+        {
+            "operation_id": len(operation_trace),
+            "operation_type": "cell_update",
+            "row_idx": row_key,
+            "row_pos": row_pos,
+            "column": feature_col,
+            "action": "replace_nearby",
+            "source": "demandclean_value_estimator",
+            "old_value": before,
+            "new_value": value,
+            "changed": _norm(before) != _norm(value),
+            "source_path": "",
         }
     )
 

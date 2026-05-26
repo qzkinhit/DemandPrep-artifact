@@ -17,7 +17,8 @@ rich>=13.0
 colorlog>=6.0
 beautifulsoup4>=4.12
 h5py>=3.0
+plotly>=5.18
+streamlit>=1.30
 
 # Optional benchmark-assisted detector:
 # raha>=1.20
-

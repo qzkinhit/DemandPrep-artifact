@@ -8,6 +8,7 @@
 import logging
 import os
 import json
+import sys
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
@@ -50,7 +51,13 @@ class DemandCleanLogger:
 
         self.logger = logging.getLogger(name)
         self.logger.setLevel(level)
+        for handler in list(self.logger.handlers):
+            try:
+                handler.close()
+            except Exception:
+                pass
         self.logger.handlers = []  # 清除已有的 handler
+        self.logger.propagate = False
 
         # 日志格式
         formatter = logging.Formatter(
@@ -63,7 +70,7 @@ class DemandCleanLogger:
 
         # 控制台输出
         if to_console:
-            console_handler = logging.StreamHandler()
+            console_handler = logging.StreamHandler(sys.__stderr__)
             console_handler.setFormatter(formatter)
             self.logger.addHandler(console_handler)
 

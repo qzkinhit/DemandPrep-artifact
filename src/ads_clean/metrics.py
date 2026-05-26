@@ -5,9 +5,10 @@ from typing import Dict, Optional, Tuple
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.metrics import accuracy_score, f1_score, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
 
 from .datasets import MISSING_TOKENS
 from .preprocess import EncodedDataset
@@ -49,8 +50,8 @@ def evaluate_downstream(encoded: EncodedDataset, cleaned_df: pd.DataFrame) -> Di
             after = _regression_score(X_cleaned[train_idx], y[train_idx], X_cleaned[test_idx], y[test_idx], encoded.config.model_type)
             metrics.update({"downstream_before": before, "downstream_after": after, "downstream_delta": after - before})
         else:
-            before = _classification_score(X_dirty[train_idx], y[train_idx], X_dirty[test_idx], y[test_idx])
-            after = _classification_score(X_cleaned[train_idx], y[train_idx], X_cleaned[test_idx], y[test_idx])
+            before = _classification_score(X_dirty[train_idx], y[train_idx], X_dirty[test_idx], y[test_idx], encoded.config.model_type)
+            after = _classification_score(X_cleaned[train_idx], y[train_idx], X_cleaned[test_idx], y[test_idx], encoded.config.model_type)
             metrics.update({"downstream_before": before, "downstream_after": after, "downstream_delta": after - before})
     except Exception as exc:
         metrics["downstream_error"] = str(exc)
@@ -136,10 +137,12 @@ def _evaluate_fixed_split_downstream(
             before = _classification_score(
                 X_dirty[train_idx], y_train[train_idx],
                 X_test[test_idx], y_test[test_idx],
+                encoded.config.model_type,
             )
             after = _classification_score(
                 X_cleaned[after_train_idx], y_train_after[after_train_idx],
                 X_test[test_idx], y_test[test_idx],
+                encoded.config.model_type,
             )
         metrics.update({
             "downstream_fixed_before": before,
@@ -225,15 +228,23 @@ def evaluate_cell_repair(encoded: EncodedDataset, cleaned_df: pd.DataFrame) -> D
     }
 
 
-def _classification_score(X_train, y_train, X_test, y_test) -> float:
-    model = RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=1)
+def _classification_score(X_train, y_train, X_test, y_test, model_type: str) -> float:
+    if model_type == "svm":
+        model = SVC(kernel="linear", max_iter=10000, random_state=42)
+    else:
+        model = RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=1)
     model.fit(X_train, y_train.astype(int))
     pred = model.predict(X_test)
     return float(f1_score(y_test.astype(int), pred.astype(int), average="macro", zero_division=0))
 
 
 def _regression_score(X_train, y_train, X_test, y_test, model_type: str) -> float:
-    model = Ridge() if model_type == "ridge" else RandomForestRegressor(n_estimators=50, random_state=42, n_jobs=1)
+    if model_type == "linear":
+        model = LinearRegression()
+    elif model_type == "ridge":
+        model = Ridge()
+    else:
+        model = RandomForestRegressor(n_estimators=50, random_state=42, n_jobs=1)
     model.fit(X_train, y_train)
     pred = model.predict(X_test)
     return float(r2_score(y_test, pred))

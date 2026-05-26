@@ -32,7 +32,7 @@ dependencies = [
 
 [project.optional-dependencies]
 benchmark = ["raha>=1.20"]
-ui = ["streamlit>=1.30", "plotly>=5.9"]
+ui = ["streamlit>=1.30", "plotly>=5.18"]
 
 [project.scripts]
 ads-clean = "ads_clean.cli:main"

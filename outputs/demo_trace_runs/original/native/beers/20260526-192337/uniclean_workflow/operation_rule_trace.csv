@@ -1,0 +1,338 @@
+level,node,operator_id,opinformation,phase,predicate_attributes,predicate_row_count,predicate_value_count,repair_value,rule_id,target_attribute
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,0,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,1,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,2,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,3,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,0.05,4,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.9,5,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,19.2,6,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,32.0,7,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,8,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,9,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,10,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,32.0,11,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,19.2,12,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,13,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,14,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,8.4,15,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,16,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,24.0,17,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,19.2,18,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,32.0,19,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,24.0,20,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,19.2,21,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,16.0,22,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,24.0,23,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,12.0,24,ounces
+,,"[Number:(domain=ounces, format=[-inf, inf])]","Number('ounces', range=[-inf, inf])",single_attribute,ounces,1,1,24.0,25,ounces
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.057,26,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.078,27,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.095,28,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.034,29,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.071,30,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.077,31,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.063,32,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.037,33,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.049,34,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.07,35,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.047,36,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.051,37,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.05,38,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.065,39,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.052,40,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.043,41,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.067,42,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.073,43,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.082,44,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.083,45,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.068,46,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.064,47,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.089,48,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.03,49,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.0,50,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.069,51,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.084,52,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.13,53,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.061,54,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.096,55,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.06,56,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.042,57,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.058,58,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.081,59,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.05,60,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.09,61,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.035,62,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.062,63,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.093,64,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.055,65,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.086,66,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.092,67,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.04,68,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.1,69,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.094,70,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.1,71,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.12,72,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.085,73,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.099,74,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.097,75,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.045,76,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.04,77,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.088,78,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.041,79,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.028,80,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.07,81,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.06,82,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.032,83,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.076,84,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.053,85,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.066,86,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.079,87,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.08,88,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.038,89,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.08,90,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.074,91,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.087,92,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,32.0,93,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.075,94,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.059,95,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.046,96,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.098,97,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.039,98,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.072,99,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.044,100,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.09,101,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.054,102,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.056,103,abv
+,,"[Number:(domain=abv, format=[-inf, inf])]","Number('abv', range=[-inf, inf])",single_attribute,abv,1,1,0.048,104,abv
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,San Diego,105,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Boulder,106,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Brooklyn,107,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,Evansville,108,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Buellton,109,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,62,1,Grand Rapids,110,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Brooklyn,111,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Meadville,112,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Hershey,113,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,Pottstown,114,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Albuquerque,115,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Denver,116,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Portland,117,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Tampa Bay,118,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,38,1,Indianapolis,119,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Houston,120,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,Durango,121,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,Chico,122,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Duluth,123,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Chicago,124,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,Denver,125,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,25,1,Tampa,126,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Oklahoma City,127,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,San Diego,128,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Charlottesville,129,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,18,1,Boulder,130,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,11,1,Westminster,131,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Framingham,132,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Stevens Point,133,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,North Woodstock NH,134,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Soldotna,135,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,10,1,Lake Barrington,136,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,20,1,San Francisco,137,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,Reno,138,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,24,1,Brooklyn,139,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,Cincinnati,140,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Silverton OR,141,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,Rochester,142,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,Bloomington,143,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,Saint Louis,144,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Baltimore,145,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Myrtle Beach SC,146,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Waterbury,147,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Idaho Springs,148,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,San Luis Obispo,149,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Pittsburgh,150,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,Cincinnati,151,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Portland,152,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Edwards CO,153,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Hayward WI,154,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Paso Robles,155,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,15,1,Los Angeles,156,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Marietta,157,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,Lansdale,158,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Portland,159,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,14,1,Ashland,160,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Santa Cruz,161,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,Chicago,162,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,18,1,Manhattan,163,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,Lyons,164,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Stevensville,165,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,Chicago,166,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,31,1,Longmont,167,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Dallas,168,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,Dillon,169,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Mooresville NC,170,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,20,1,Aurora,171,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,Detroit,172,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,19,1,Chandler,173,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,Monroe,174,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Afton,175,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Gloucester,176,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,10,1,Houston,177,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Lake Geneva,178,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,Helena,179,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,19,1,Eagle,180,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Kearney,181,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,Utica,182,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Denton TX,183,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,St. Paul,184,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Nellysford,185,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,York,186,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Springdale,187,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,15,1,Export,188,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Petoskey,189,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Atlantic Highlands,190,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,Paonia,191,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Angola,192,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Cambridge,193,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,Portland,194,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Denver,195,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Des Moines,196,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Mill Valley,197,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Asheville,198,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Evanston,199,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,17,1,Boise,200,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,Brooklyn Center,201,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,23,1,Portland,202,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,Frankenmuth,203,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,Boston,204,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,Belmont,205,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,14,1,Conroe,206,city
+1,city,block:city,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {city})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,Fort Worth,207,city
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,CA,208,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,CO,209,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,NY,210,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,IN,211,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,CA,212,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,62,1,MI,213,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,NY,214,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,PA,215,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,PA,216,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,PA,217,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,NM,218,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,CO,219,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,ME,220,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,FL,221,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,38,1,IN,222,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,TX,223,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,CO,224,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,CA,225,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,MN,226,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,IL,227,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,CO,228,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,25,1,FL,229,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,OK,230,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,CA,231,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,VA,232,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,18,1,CO,233,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,11,1,MA,234,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,MA,235,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,WI,236,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,NH,237,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,AK,238,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,10,1,IL,239,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,20,1,CA,240,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,NV,241,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,24,1,NY,242,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,OH,243,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,OR,244,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,MI,245,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,IL,246,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,MO,247,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,MD,248,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,SC,249,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,VT,250,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,CO,251,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,CA,252,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,PA,253,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,9,1,OH,254,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,OR,255,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,CO,256,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,WI,257,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,CA,258,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,15,1,CA,259,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,GA,260,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,PA,261,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,OR,262,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,14,1,OR,263,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,CA,264,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,IL,265,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,18,1,KS,266,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,CO,267,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,MT,268,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,IL,269,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,31,1,CO,270,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,TX,271,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,7,1,CO,272,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,NC,273,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,20,1,IN,274,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,6,1,MI,275,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,19,1,AZ,276,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,WI,277,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,VA,278,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,MA,279,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,10,1,TX,280,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,WI,281,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,5,1,MT,282,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,19,1,CO,283,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,NE,284,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,NY,285,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,TX,286,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,MN,287,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,VA,288,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,PA,289,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,AR,290,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,15,1,PA,291,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,MI,292,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,NJ,293,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,CO,294,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,IN,295,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,MA,296,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,2,1,ME,297,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,CO,298,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,IA,299,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,CA,300,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,NC,301,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,IL,302,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,17,1,ID,303,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,13,1,MN,304,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,23,1,OR,305,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,3,1,MI,306,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,12,1,MA,307,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,4,1,CA,308,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,14,1,TX,309,state
+1,state,block:state,"{left: (""[FunctionalDependency:(s: {brewery_id}, t: {state})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,brewery_id,8,1,TX,310,state
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.06,311,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.06,312,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.051,313,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.047,314,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.07,315,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.042,316,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.049,317,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.06,318,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.068,319,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.055,320,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,3,1,0.06,321,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,12,1,0.039,322,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.07,323,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,4,1,0.05,324,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.07,325,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.05,326,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.07,327,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.05,328,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.1,329,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.057,330,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.065,331,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.055,332,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.064,333,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.05,334,abv
+1,abv,block:abv,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {abv})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,0.054,335,abv
+1,ibu,block:ibu,"{left: (""[FunctionalDependency:(s: {beer_name, brewery_id}, t: {ibu})]"", 0.0), operator: *, right: (1.0, 1.0), result: 0.0}",block_model,beer_name|brewery_id,2,1,17,336,ibu

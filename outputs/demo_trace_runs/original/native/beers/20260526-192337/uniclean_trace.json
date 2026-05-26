@@ -1,0 +1,13 @@
+{
+  "dataset": "beers",
+  "cleaner_profile": "beers",
+  "cleaner_count": 7,
+  "candidate_repairs": 4081,
+  "workflow_dir": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_workflow",
+  "cleaned_csv": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_cleaned.csv",
+  "stdout_log": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_stdout.log",
+  "operator_trace_json": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_workflow/operator_trace.json",
+  "operator_trace_csv": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_workflow/operator_trace.csv",
+  "operation_rule_trace_csv": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_workflow/operation_rule_trace.csv",
+  "operator_weight_trace_csv": "outputs/demo_trace_runs/original/native/beers/20260526-192337/uniclean_workflow/operator_weight_trace.csv"
+}

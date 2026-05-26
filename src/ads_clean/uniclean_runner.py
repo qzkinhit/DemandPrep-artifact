@@ -27,6 +27,7 @@ def run_uniclean(
     run_dir: Path,
     single_max: int = 10000,
     verbose: bool = False,
+    trace_operators: bool = False,
 ) -> UniCleanResult:
     from pyspark.sql import SparkSession
     from pyspark.sql.functions import monotonically_increasing_id
@@ -43,6 +44,7 @@ def run_uniclean(
     cleaners = build_cleaners(config.cleaner_profile)
 
     log_path = run_dir / "uniclean_stdout.log"
+    operator_trace_json = table_path / "operator_trace.json"
 
     def _run():
         spark = (
@@ -65,7 +67,12 @@ def run_uniclean(
             data.persist()
 
             cleaned_spark = CleanonLocalWithnoSmple(
-                spark, cleaners, data, str(table_path), single_max=single_max
+                spark,
+                cleaners,
+                data,
+                str(table_path),
+                single_max=single_max,
+                trace_path=str(operator_trace_json) if trace_operators else None,
             )
             return cleaned_spark.toPandas()
         finally:
@@ -98,6 +105,10 @@ def run_uniclean(
         "cleaned_csv": str(cleaned_csv),
         "stdout_log": str(log_path),
     }
+    for name in ("operator_trace.json", "operator_trace.csv", "operation_rule_trace.csv", "operator_weight_trace.csv"):
+        path = table_path / name
+        if path.exists():
+            trace[name.replace(".", "_")] = str(path)
     return UniCleanResult(cleaned_df, cleaned_csv, candidates, value_source, trace)
 
 

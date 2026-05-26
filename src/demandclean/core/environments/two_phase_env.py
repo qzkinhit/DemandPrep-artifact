@@ -270,7 +270,7 @@ class TwoPhaseCleaningEnv:
         unique, counts = np.unique(valid_labels, return_counts=True)
         return unique[np.argmax(counts)]
 
-    def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
+    def step(self, action: int, action_info: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, float, bool, Dict]:
         """
         执行动作
 
@@ -287,6 +287,8 @@ class TwoPhaseCleaningEnv:
         if self.current_error_idx >= len(self.error_list):
             return self._get_state(), 0, True, {}
 
+        state_before = self._get_state().copy()
+        action_info = action_info or {}
         error = self.error_list[self.current_error_idx]
         idx, col = error['idx'], error['col']
         error_type = error['type']
@@ -384,8 +386,8 @@ class TwoPhaseCleaningEnv:
                 self.col_remaining_errors[col] = max(0, self.col_remaining_errors[col] - 1)
             self.total_remaining_errors = max(0, self.total_remaining_errors - 1)
 
-        # 记录完整决策日志
-        self.decision_log.append({
+        # 记录完整决策日志。状态向量和 Q 值来自真实推理过程，用于后续可解释展示。
+        record = {
             'error_idx': self.current_error_idx,
             'row_idx': idx,
             'col': col,
@@ -394,7 +396,10 @@ class TwoPhaseCleaningEnv:
             'original_action': original_action,
             'dirty_value': dirty_value_safe,
             'result_value': result_value,
-        })
+        }
+        record.update(self._state_trace_record(state_before))
+        record.update(self._action_trace_record(action_info))
+        self.decision_log.append(record)
 
         self.current_error_idx += 1
         done = self.current_error_idx >= len(self.error_list)
@@ -544,6 +549,39 @@ class TwoPhaseCleaningEnv:
     def get_decision_log(self) -> List[Dict]:
         """获取完整决策日志（所有4种动作的详情）"""
         return self.decision_log
+
+    def _state_trace_record(self, state: np.ndarray) -> Dict[str, float]:
+        names = [
+            "state_error_type",
+            "state_feature_importance",
+            "state_distance_to_boundary",
+            "state_row_position",
+            "state_col_index",
+            "state_col_error_rate",
+            "state_sample_retention",
+            "state_var_retention",
+            "state_remaining_budget_ratio",
+            "state_remaining_errors_ratio",
+        ]
+        return {name: float(state[i]) if i < len(state) else 0.0 for i, name in enumerate(names)}
+
+    def _action_trace_record(self, action_info: Dict[str, Any]) -> Dict[str, Any]:
+        record: Dict[str, Any] = {
+            "stage1_action": action_info.get("stage1_action"),
+            "stage2_action": action_info.get("stage2_action"),
+        }
+        q_values = action_info.get("q_values")
+        if q_values is not None:
+            for i, value in enumerate(q_values):
+                prefix = "stage1_q" if i < 3 else "stage2_q"
+                offset = i if i < 3 else i - 3
+                try:
+                    record[f"{prefix}_{offset}"] = float(value)
+                except (TypeError, ValueError):
+                    record[f"{prefix}_{offset}"] = value
+        if "q_values_error" in action_info:
+            record["q_values_error"] = action_info["q_values_error"]
+        return record
 
     def save_plan_csv(self, filepath: str) -> None:
         """

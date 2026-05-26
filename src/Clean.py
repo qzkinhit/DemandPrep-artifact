@@ -1,3 +1,5 @@
+import csv
+import json
 import os
 import time
 
@@ -10,6 +12,111 @@ from AnalyticsCache.handle_rules import getOpWeights, transformRulesToSpark, tra
 from CoreSetSample.mapping_samplify import Generate_Sample
 from SampleScrubber.cleaner_model import NOOP
 from SampleScrubber.param_selector import customclean
+
+
+def _listify(value):
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [str(v) for v in value]
+    return [str(value)]
+
+
+def _cleaner_id(cleaner):
+    msg = getattr(cleaner, "msg", None)
+    if msg:
+        return str(msg)
+    domain = ",".join(_listify(getattr(cleaner, "domain", None)))
+    source = ",".join(_listify(getattr(cleaner, "source", None)))
+    target = ",".join(_listify(getattr(cleaner, "target", None)))
+    return f"{cleaner.__class__.__name__}:{source}->{target}:{domain}"
+
+
+def _operator_record(cleaner, phase, order, level=None, node=None, sample_rows=None, rule_count=None):
+    return {
+        "operator_id": _cleaner_id(cleaner),
+        "operator_class": cleaner.__class__.__name__,
+        "phase": phase,
+        "order": order,
+        "level": level if level is not None else "",
+        "node": str(node) if node is not None else "",
+        "source_attributes": "|".join(_listify(getattr(cleaner, "source", None))),
+        "target_attributes": "|".join(_listify(getattr(cleaner, "target", None))),
+        "domain": "|".join(_listify(getattr(cleaner, "domain", None))),
+        "sample_rows": sample_rows if sample_rows is not None else "",
+        "rule_count": rule_count if rule_count is not None else "",
+    }
+
+
+def _rule_record(rule, phase, operator_id, order, level=None, node=None):
+    predicate = getattr(rule, "predicate", ([], [], []))
+    if predicate is None:
+        predicate = ([], [], [])
+    predicate_attrs = predicate[0] if hasattr(predicate, "__len__") and len(predicate) > 0 else []
+    predicate_values = predicate[1] if hasattr(predicate, "__len__") and len(predicate) > 1 else []
+    predicate_rows = predicate[2] if hasattr(predicate, "__len__") and len(predicate) > 2 else []
+    return {
+        "rule_id": order,
+        "phase": phase,
+        "operator_id": str(operator_id),
+        "level": level if level is not None else "",
+        "node": str(node) if node is not None else "",
+        "target_attribute": str(getattr(rule, "domain", "")),
+        "repair_value": str(getattr(rule, "repairvalue", "")),
+        "predicate_attributes": "|".join(_listify(predicate_attrs)),
+        "predicate_value_count": len(predicate_values) if hasattr(predicate_values, "__len__") else "",
+        "predicate_row_count": len(predicate_rows) if hasattr(predicate_rows, "__len__") else "",
+        "opinformation": str(getattr(rule, "opinformation", "")),
+    }
+
+
+def _append_rule_records(trace, edit_rule_list, phase, operator_id, level=None, node=None):
+    for rule in edit_rule_list or []:
+        trace["rules"].append(
+            _rule_record(rule, phase, operator_id, len(trace["rules"]), level=level, node=node)
+        )
+
+
+def _append_weight_records(trace, grouped_opinfo, group_weights, sorted_dict):
+    sorted_lookup = {str(key): value for key, value in (sorted_dict or {}).items()}
+    for level_index, level in (grouped_opinfo or {}).items():
+        for target_node, cleaners in level.items():
+            weights = (group_weights or {}).get(target_node, [])
+            for order, cleaner in enumerate(cleaners):
+                weight = weights[order] if order < len(weights) else ""
+                trace["weights"].append({
+                    "level": level_index,
+                    "node": str(target_node),
+                    "operator_id": _cleaner_id(cleaner),
+                    "order": order,
+                    "weight": weight,
+                    "sorted_group": str(sorted_lookup.get(str(target_node), "")),
+                })
+
+
+def _write_trace_files(trace_path, trace):
+    if not trace_path:
+        return
+    os.makedirs(os.path.dirname(trace_path), exist_ok=True)
+    with open(trace_path, "w", encoding="utf-8") as f:
+        json.dump(trace, f, indent=2, ensure_ascii=False)
+
+    base_dir = os.path.dirname(trace_path)
+    _write_csv(os.path.join(base_dir, "operator_trace.csv"), trace.get("operators", []))
+    _write_csv(os.path.join(base_dir, "operation_rule_trace.csv"), trace.get("rules", []))
+    _write_csv(os.path.join(base_dir, "operator_weight_trace.csv"), trace.get("weights", []))
+
+
+def _write_csv(path, rows):
+    if not rows:
+        with open(path, "w", encoding="utf-8", newline="") as f:
+            f.write("")
+        return
+    fieldnames = sorted({key for row in rows for key in row.keys()})
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def CleanonLocal(spark, cleanners, data, table_path, batch_size=500, single_max=30000):
@@ -543,10 +650,18 @@ def CleanonCloudRandom(spark, cleaners, data, table_name, database_name, batch_s
     print(group_weights)
     return data
 
-def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, single_max=30000):
+def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, single_max=30000,
+                            trace_path=None):
     current = 'Tmp1'
     print("初始化清洗器和分析依赖关系...")
     Edges, singles, multis = PreParamClassier(cleanners)
+    trace = {
+        "operators": [],
+        "rules": [],
+        "weights": [],
+        "levels": [],
+        "trace_path": trace_path or "",
+    }
 
     print("处理单属性清洗算子：")
     for single in singles:
@@ -567,6 +682,21 @@ def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, 
         # 调用 customclean 进行清洗操作
         preCleaners = [single]
         _, output, editRuleList, _ = customclean(df_pandas, precleaners=preCleaners)
+        trace["operators"].append(
+            _operator_record(
+                single,
+                phase="single_attribute",
+                order=len(trace["operators"]),
+                sample_rows=int(df_pandas.shape[0]),
+                rule_count=len(editRuleList or []),
+            )
+        )
+        _append_rule_records(
+            trace,
+            editRuleList,
+            phase="single_attribute",
+            operator_id=_cleaner_id(single),
+        )
 
         if editRuleList:
             # 如果有清洗操作规则，应用到 Spark DataFrame 上
@@ -580,6 +710,7 @@ def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, 
     levels, models, nodes = associations_classier(multis, source_sets, target_sets)
     print("执行层级 (并行组):", levels)
     print("目标模型分类:", models)
+    trace["levels"] = [{"level": i, "nodes": [str(node) for node in level]} for i, level in enumerate(nodes)]
 
     editRuleDict = {}  # 用于统计溯源权重
     editRules = NOOP()  # 初始化无操作规则
@@ -635,6 +766,17 @@ def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, 
                     # 将 Spark DataFrame 转换为 Pandas DataFrame
                     df_pandas = data.select(select_cols).toPandas()
                     print(f"数据块大小: {df_pandas.shape[0]}")
+                    for model in models[node]:
+                        trace["operators"].append(
+                            _operator_record(
+                                model,
+                                phase="block_model",
+                                order=len(trace["operators"]),
+                                level=level_index,
+                                node=node,
+                                sample_rows=int(df_pandas.shape[0]),
+                            )
+                        )
 
                     preCleaners = [single for single in singles if single.domain in (sset + node_cols)]
                     _, output, _, _ = customclean(df_pandas, precleaners=preCleaners)
@@ -652,6 +794,14 @@ def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, 
                     print(partition)
                     editRule1, output, editRuleList, _ = customclean(output, cleaners=[blockModels],
                                                                      partition=partition)
+                    _append_rule_records(
+                        trace,
+                        editRuleList,
+                        phase="block_model",
+                        operator_id=f"block:{node}",
+                        level=level_index,
+                        node=node,
+                    )
                     editRule *= editRule1
                 else:
                     print(f"  当前节点: {node} 无可用清洗信号")
@@ -688,10 +838,12 @@ def CleanonLocalWithnoSmple(spark, cleanners, data, table_path, batch_size=500, 
     group_weights = getOpWeights(editRuleDict, grouped_opinfo)
     print("\n清洗流程展示:")
     sorted_dict = sort_opinfo_by_weights(grouped_opinfo, group_weights)
+    _append_weight_records(trace, grouped_opinfo, group_weights, sorted_dict)
 
     OpPlantuml = generate_plantuml_corrected(single_opinfo, grouped_opinfo, sorted_dict)
     PlantUML().process_str(OpPlantuml, directory=table_path)
     plt.savefig(rf"{table_path}/acplt.png", format="png")
     print("关联图存储到:", rf"{table_path}/acplt.png")
+    _write_trace_files(trace_path, trace)
 
     return data

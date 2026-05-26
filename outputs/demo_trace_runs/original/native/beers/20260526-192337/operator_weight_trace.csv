@@ -1,0 +1,6 @@
+level,node,operator_id,order,sorted_group,weight
+1,brewery_name,"[FunctionalDependency:(s: {'brewery_id'}, t: {'brewery_name'})]",0,"[(<SampleScrubber.cleaner.multiple.AttrRelation object at 0x147ca00a0>, 0.0)]",0.0
+1,city,"[FunctionalDependency:(s: {'brewery_id'}, t: {'city'})]",0,"[(<SampleScrubber.cleaner.multiple.AttrRelation object at 0x147ca0100>, 0.3992248062015504)]",0.3992248062015504
+1,state,"[FunctionalDependency:(s: {'brewery_id'}, t: {'state'})]",0,"[(<SampleScrubber.cleaner.multiple.AttrRelation object at 0x147ca0040>, 0.3992248062015504)]",0.3992248062015504
+1,abv,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'abv'})]",0,"[(<SampleScrubber.cleaner.multiple.AttrRelation object at 0x147816bb0>, 0.1937984496124031)]",0.1937984496124031
+1,ibu,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'ibu'})]",0,"[(<SampleScrubber.cleaner.multiple.AttrRelation object at 0x147816910>, 0.007751937984496124)]",0.007751937984496124

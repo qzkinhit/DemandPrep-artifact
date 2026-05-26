@@ -118,6 +118,9 @@ def main(argv=None) -> int:
             max_detected_errors=args.max_detected_errors,
             base_cv_folds=args.base_cv_folds,
             verifier_policy=args.verifier_policy,
+            force_uniclean_run=args.force_uniclean_run,
+            trace_operators=args.trace_operators,
+            model_type_override=args.model_type_override,
             seed=args.seed,
         )
         print(json.dumps({"run_dir": str(result.run_dir), "cleaned_csv": str(result.cleaned_csv), "metrics": result.metrics}, indent=2, default=str))
@@ -142,6 +145,9 @@ def main(argv=None) -> int:
             max_detected_errors=args.max_detected_errors,
             base_cv_folds=args.base_cv_folds,
             verifier_policy=args.verifier_policy,
+            force_uniclean_run=args.force_uniclean_run,
+            trace_operators=args.trace_operators,
+            model_type_override=args.model_type_override,
             seed=args.seed,
         )
         print(json.dumps([{"dataset": r.dataset, "run_dir": str(r.run_dir), "cleaned_csv": str(r.cleaned_csv)} for r in results], indent=2))
@@ -173,6 +179,9 @@ def main(argv=None) -> int:
             max_detected_errors=args.max_detected_errors,
             base_cv_folds=args.base_cv_folds,
             verifier_policy=args.verifier_policy,
+            force_uniclean_run=args.force_uniclean_run,
+            trace_operators=args.trace_operators,
+            model_type_override=args.model_type_override,
             seed=args.seed,
         )
         print(json.dumps([{"dataset": r.dataset, "run_dir": str(r.run_dir), "cleaned_csv": str(r.cleaned_csv)} for r in results], indent=2))
@@ -233,6 +242,9 @@ def _add_demandclean_runtime_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--max-detected-errors", type=int, default=0)
     parser.add_argument("--base-cv-folds", type=int, default=5)
     parser.add_argument("--verifier-policy", choices=["accept_all", "rollback_no_improve"], default="accept_all")
+    parser.add_argument("--force-uniclean-run", action="store_true")
+    parser.add_argument("--trace-operators", action="store_true")
+    parser.add_argument("--model-type-override", default=None)
     parser.add_argument("--seed", type=int, default=42)
 
 

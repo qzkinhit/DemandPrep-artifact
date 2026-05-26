@@ -1,0 +1,33 @@
+{
+  "trace_version": 1,
+  "dataset": "beers",
+  "scenario": "original",
+  "error_rate": null,
+  "task_type": "classification",
+  "model_type": "random_forest",
+  "verifier_selected": "candidate",
+  "capabilities": {
+    "action_trace": true,
+    "operation_trace": true,
+    "model_trace": true,
+    "runtime_operator_trace": true,
+    "cached_uniclean": false
+  },
+  "action_counts": {
+    "no_op": 0,
+    "repair_value": 0,
+    "delete": 2,
+    "replace_nearby": 0
+  },
+  "operation_count": 2,
+  "accepted_operation_count": 2,
+  "uniclean_candidate_repairs": 4081,
+  "trace_files": {
+    "action_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/action_trace.csv",
+    "operation_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/operation_trace.csv",
+    "model_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/model_trace.csv",
+    "operator_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/operator_trace.csv",
+    "operation_rule_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/operation_rule_trace.csv",
+    "operator_weight_trace": "outputs/demo_trace_runs/original/native/beers/20260526-192337/operator_weight_trace.csv"
+  }
+}

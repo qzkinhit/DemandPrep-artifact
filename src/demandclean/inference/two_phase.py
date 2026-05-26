@@ -132,12 +132,24 @@ class TwoPhaseInference:
 
         # 推理
         while True:
+            action_info: Dict[str, Any] = {}
             if self.config.agent_type in (AgentType.TWO_STAGE, AgentType.DUELING_TWO_STAGE):
-                final_action, _, _ = self.agent.act(state, training=False)
+                final_action, stage1_action, stage2_action = self.agent.act(state, training=False)
+                action_info.update({
+                    "stage1_action": stage1_action,
+                    "stage2_action": stage2_action,
+                })
             else:
                 final_action = self.agent.act(state, training=False)
 
-            next_state, _, done, _ = self._env.step(final_action)
+            if hasattr(self.agent, "get_q_values"):
+                try:
+                    q_values = self.agent.get_q_values(state)
+                    action_info["q_values"] = q_values.tolist() if hasattr(q_values, "tolist") else list(q_values)
+                except Exception:
+                    action_info["q_values_error"] = "unavailable"
+
+            next_state, _, done, _ = self._env.step(final_action, action_info=action_info)
             state = next_state
             processed += 1
 

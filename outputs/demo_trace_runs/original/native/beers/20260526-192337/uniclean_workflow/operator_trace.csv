@@ -1,0 +1,12 @@
+domain,level,node,operator_class,operator_id,order,phase,rule_count,sample_rows,source_attributes,target_attributes
+ounces,,,Number,"[Number:(domain=ounces, format=[-inf, inf])]",0,single_attribute,26,27,ounces,ounces
+abv,,,Number,"[Number:(domain=abv, format=[-inf, inf])]",1,single_attribute,79,80,abv,abv
+brewery_name|brewery_id,1,brewery_name,AttrRelation,"[FunctionalDependency:(s: {'brewery_id'}, t: {'brewery_name'})]",2,block_model,,2406,brewery_id,brewery_name
+brewery_id|city,1,city,AttrRelation,"[FunctionalDependency:(s: {'brewery_id'}, t: {'city'})]",3,block_model,,2406,brewery_id,city
+state|brewery_id,1,state,AttrRelation,"[FunctionalDependency:(s: {'brewery_id'}, t: {'state'})]",4,block_model,,2406,brewery_id,state
+beer_name|abv|brewery_id,1,abv,AttrRelation,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'abv'})]",5,block_model,,2406,beer_name|brewery_id,abv
+ibu|beer_name|brewery_id,1,ibu,AttrRelation,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'ibu'})]",6,block_model,,2406,beer_name|brewery_id,ibu
+brewery_id|city,1,city,AttrRelation,"[FunctionalDependency:(s: {'brewery_id'}, t: {'city'})]",7,block_model,,2406,brewery_id,city
+state|brewery_id,1,state,AttrRelation,"[FunctionalDependency:(s: {'brewery_id'}, t: {'state'})]",8,block_model,,2406,brewery_id,state
+beer_name|abv|brewery_id,1,abv,AttrRelation,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'abv'})]",9,block_model,,2406,beer_name|brewery_id,abv
+ibu|beer_name|brewery_id,1,ibu,AttrRelation,"[FunctionalDependency:(s: {'beer_name', 'brewery_id'}, t: {'ibu'})]",10,block_model,,2406,beer_name|brewery_id,ibu

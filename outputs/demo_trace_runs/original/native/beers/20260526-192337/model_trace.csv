@@ -1,0 +1,2 @@
+dataset,scenario,error_rate,task_type,model_type,downstream_before,downstream_after,downstream_delta,downstream_fixed_before,downstream_fixed_after,downstream_fixed_delta,verifier_policy,verifier_selected
+beers,original,,classification,random_forest,0.14697316372572372,0.14697316372572372,0.0,0.15110847210616285,0.16791574006352364,0.01680726795736079,accept_all,candidate
