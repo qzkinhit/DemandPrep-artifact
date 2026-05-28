@@ -1,21 +1,20 @@
-# DDPAgent Artifact
-
+# DemandPrep-artifact
 [中文说明](README.zh-CN.md)
 
-This repository contains the code, datasets, cached cleaning outputs, reported experiment summaries, and interactive demo for DDPAgent:
+This repository contains the code, datasets, cached cleaning outputs, reported experiment summaries, and interactive demo for DemandPrep:
 
-**DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
+**DemandPrep for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
 
 The repository does not include the paper source or PDF. It is scoped to reproducible code, data artifacts, experiment outputs, and the demo.
 
 ## Citation
 
-If you use this repository, please cite the accompanying DDPAgent paper:
+If you use this repository, please cite the accompanying DemandPrep paper:
 
 ```bibtex
-@misc{qian2026ddpagent,
-  title  = {DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
-  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi},
+@misc{qian2026DemandPrep,
+  title  = {DemandPrep: Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
+  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi and Wang, chen},
   year   = {2026},
   note   = {Research artifact}
 }
@@ -23,7 +22,7 @@ If you use this repository, please cite the accompanying DDPAgent paper:
 
 ## Core Idea
 
-DDPAgent treats data preparation as a data-governance agent rather than a single fixed cleaning pipeline. Given a downstream task, model type, budget, candidate actions, and available data operators, the system first trains an action-allocation policy without paying human ground-truth cost. At inference time, the policy chooses what to do for each detected error or data object, such as no-op, repair, delete, or value replacement. Each action then dispatches to its own operator space. In the cleaning instantiation used here, repair and replacement actions use a multi-signal cleaner orchestration layer that generates concrete repair rules and execution traces.
+DemandPrep treats data preparation as a data-governance agent rather than a single fixed cleaning pipeline. Given a downstream task, model type, budget, candidate actions, and available data operators, the system first trains an action-allocation policy without paying human ground-truth cost. At inference time, the policy chooses what to do for each detected error or data object, such as no-op, repair, delete, or value replacement. Each action then dispatches to its own operator space. In the cleaning instantiation used here, repair and replacement actions use a multi-signal cleaner orchestration layer that generates concrete repair rules and execution traces.
 
 This design is intentionally extensible. The action space is not limited to cleaning. Future actions can include data augmentation, data selection, model-tuning decisions, or other data-preparation operations. Likewise, each action can maintain its own operator library and orchestration strategy.
 
@@ -37,11 +36,11 @@ The Streamlit demo also provides a real-run button. It invokes:
 python -m ads_clean.cli run ... --force-uniclean-run --trace-operators
 ```
 
-That command reruns UniClean and DDPAgent instead of fabricating operator coverage, rule counts, weights, or data operations.
+That command reruns UniClean and DemandPrep instead of fabricating operator coverage, rule counts, weights, or data operations.
 
 ## Contents
 
-- `src/ads_clean`: DDPAgent orchestration, dataset loading, action allocation execution, trace writing, baseline evaluation, and summarization.
+- `src/ads_clean`: DemandPrep orchestration, dataset loading, action allocation execution, trace writing, baseline evaluation, and summarization.
 - `src/demandclean`: vendored RL action-allocation implementation used by the controller.
 - `src/SampleScrubber`, `src/AnalyticsCache`, `src/CoreSetSample`: vendored operator-execution substrate used by the cleaning executor.
 - `data/uniclean`: packaged native-error tables for Beers, Flights, Hospitals, Rayyan, and Tax-10K.
@@ -82,7 +81,7 @@ This runs unit tests, validates artifact scope, checks reported result summaries
 
 ## Full Experiment Rerun
 
-To rerun DDPAgent experiments against cached cleaning outputs, use:
+To rerun DemandPrep experiments against cached cleaning outputs, use:
 
 ```bash
 bash scripts/reproduce_full.sh
