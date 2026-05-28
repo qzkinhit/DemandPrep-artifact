@@ -1,21 +1,21 @@
-# DDPAgent 开源复现仓库
+# DemandPrep 开源复现仓库
 
 [English README](README.md)
 
-本仓库包含 DDPAgent 的代码、数据集、缓存清洗结果、实验汇总和交互式演示：
+本仓库包含 DemandPrep 的代码、数据集、缓存清洗结果、实验汇总和交互式演示：
 
-**DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
+**DemandPrep for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution**
 
 本仓库不包含论文 LaTeX 源码或 PDF。开源范围仅包括可复现代码、数据 artifact、实验输出和演示界面。
 
 ## 引用
 
-如果使用本仓库，请引用随附的 DDPAgent 论文：
+如果使用本仓库，请引用随附的 DemandPrep 论文：
 
 ```bibtex
-@misc{qian2026ddpagent,
-  title  = {DDPAgent for Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
-  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi},
+@misc{qian2026DemandPrep,
+  title  = {DemandPrep: Demand-Driven Data Preparation via Agentic Action Allocation and Operator-Grounded Execution},
+  author = {Qian, Zekai and Ding, Xiaoou and Wang, Hongzhi and Wang Chen},
   year   = {2026},
   note   = {Research artifact}
 }
@@ -23,7 +23,7 @@
 
 ## 核心思想
 
-DDPAgent 将数据准备看作一个数据治理 agent，而不是一条固定的数据清洗流水线。给定下游任务、候选模型、预算、候选动作和可用的数据算子后，系统先进行零人工真值成本的动作分配训练。在推理阶段，策略会为每个检测到的错误或数据对象选择动作，例如不操作、修复、删除或近邻值替换。动作确定后，再进入该动作对应的算子空间，由算子编排层生成具体的数据操作和可追溯记录。
+DemandPrep 将数据准备看作一个数据治理 agent，而不是一条固定的数据清洗流水线。给定下游任务、候选模型、预算、候选动作和可用的数据算子后，系统先进行零人工真值成本的动作分配训练。在推理阶段，策略会为每个检测到的错误或数据对象选择动作，例如不操作、修复、删除或近邻值替换。动作确定后，再进入该动作对应的算子空间，由算子编排层生成具体的数据操作和可追溯记录。
 
 当前实现以数据清洗为例。修复和替换动作会调用多信号清洗算子编排层，生成真实修复规则、执行顺序和反馈权重。这个框架本身不是只能做清洗。后续可以扩展到数据增强、数据选择、是否调模型、模型调参等动作。每个动作下面也可以维护自己的算子库和编排策略。
 
@@ -37,11 +37,11 @@ Streamlit 页面中也提供真实运行按钮。该按钮实际调用：
 python -m ads_clean.cli run ... --force-uniclean-run --trace-operators
 ```
 
-也就是说，它会重新运行 UniClean 和 DDPAgent，不会伪造算子覆盖范围、修复规则数量、权重或数据操作。
+也就是说，它会重新运行 UniClean 和 DemandPrep，不会伪造算子覆盖范围、修复规则数量、权重或数据操作。
 
 ## 目录结构
 
-- `src/ads_clean`：DDPAgent 主流程，包括数据集加载、动作分配执行、trace 输出、baseline 评估和结果汇总。
+- `src/ads_clean`：DemandPrep 主流程，包括数据集加载、动作分配执行、trace 输出、baseline 评估和结果汇总。
 - `src/demandclean`：动作分配控制器使用的强化学习实现。
 - `src/SampleScrubber`、`src/AnalyticsCache`、`src/CoreSetSample`：清洗算子执行和编排相关代码。
 - `data/uniclean`：Beers、Flights、Hospitals、Rayyan 和 Tax-10K 的原生错误表。
@@ -82,7 +82,7 @@ bash scripts/reproduce_cached.sh
 
 ## 完整实验复跑
 
-如果要重新跑 DDPAgent 实验，可以执行：
+如果要重新跑 DemandPrep 实验，可以执行：
 
 ```bash
 bash scripts/reproduce_full.sh
